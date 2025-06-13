@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduWealth - Learn Skills & Earn Money</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #f97316;
+            --accent: #8b5cf6;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --success: #10b981;
+            --gray: #94a3b8;
+            --light-gray: #e2e8f0;
+            --budget: #ef4444;
+            --silver: #c0c0c0;
+            --gold: #ffd700;
+            --elite: #e5e4e2;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd43b;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            margin-left: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-primary:hover {
+            background-color: #e56d0c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .btn-basic {
+            background-color: #94a3b8;
+            color: white;
+            border: 2px solid #94a3b8;
+        }
+
+        .btn-silver {
+            background-color: var(--silver);
+            color: var(--dark);
+            border: 2px solid var(--silver);
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--dark);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #8b5cf6, #4f46e5);
+            color: white;
+            border: 2px solid #8b5cf6;
+        }
+
+        .btn-elite {
+            background: linear-gradient(135deg, #0f172a, #334155);
+            color: white;
+            border: 2px solid #0f172a;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #ffd43b;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* How It Works */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--primary-dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background-color: var(--secondary);
+            border-radius: 5px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.2rem;
+            color: #334155;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .step-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+        }
+
+        .step-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .step-card p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        /* Packages Section */
+        .packages {
+            background-color: var(--light);
+        }
+
+        .package-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+            position: relative;
+            border-top: 5px solid;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .package-card.basic {
+            border-top-color: #94a3b8;
+        }
+
+        .package-card.silver {
+            border-top-color: var(--silver);
+        }
+
+        .package-card.gold {
+            border-top-color: var(--gold);
+        }
+
+        .package-card.premium {
+            border-top-color: #8b5cf6;
+        }
+
+        .package-card.elite {
+            border-top-color: #0f172a;
+        }
+
+        .package-header {
+            padding: 30px;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .package-header h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .package-price span {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .package-features {
+            padding: 30px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li i {
+            color: var(--success);
+        }
+
+        .income-stats {
+            background: rgba(15, 23, 42, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .income-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .income-label {
+            font-weight: 500;
+        }
+
+        .income-value {
+            font-weight: 700;
+        }
+
+        /* Referral Program */
+        .referral-program {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .referral-program::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            opacity: 0.1;
+        }
+
+        .referral-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .referral-text {
+            flex: 1;
+        }
+
+        .referral-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .referral-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .referral-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .referral-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .commission-structure {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .commission-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .commission-table th, 
+        .commission-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .commission-table th {
+            background: rgba(255, 255, 255, 0.15);
+            font-weight: 600;
+        }
+
+        .commission-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight {
+            background: rgba(255, 215, 0, 0.2);
+            font-weight: 700;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: white;
+        }
+
+        .testimonial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--primary);
+            opacity: 0.1;
+            font-family: serif;
+        }
+
+        .testimonial-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #334155;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .author-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--gray);
+        }
+
+        .testimonial-earnings {
+            background: var(--success);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background-color: var(--light);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary-dark);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+            color: #64748b;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 30px 30px;
+            max-height: 500px;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cta p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links a i {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content, .referral-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text, .referral-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-btns, .stats {
+                justify-content: center;
+            }
+            
+            .nav-links, .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.3rem;
+            }
+            
+            .hero-btns, .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+            
+            .package-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .commission-table th, 
+            .commission-table td {
+                padding: 10px 5px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>EduWealth</span>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#referral">Earn Money</a></li>
+                        <li><a href="#testimonials">Success Stories</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                    <div class="auth-buttons">
+                        <a href="#" class="btn btn-outline">Login</a>
+                        <a href="#" class="btn btn-primary">Sign Up</a>
+                    </div>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Learn Valuable Skills & Earn Money as a Student</h1>
+                    <p>Affordable packages starting at just ₹99 with a powerful structured referral program to help you earn while you learn!</p>
+                    <div class="hero-btns">
+                        <a href="#packages" class="btn btn-primary">Explore Packages</a>
+                        <a href="#referral" class="btn btn-outline">Learn How to Earn</a>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">18,000+</div>
+                            <div class="stat-label">Students Enrolled</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">₹9.2 Cr+</div>
+                            <div class="stat-label">Earned by Students</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">₹99</div>
+                            <div class="stat-label">Starting Price</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="EduWealth Platform">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Start learning and earning in just three simple steps</p>
+            </div>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Choose Your Package</h3>
+                    <p>Select from our structured packages starting at just ₹99.</p>
+                    <a href="#packages" class="btn btn-primary" style="margin-top: 15px;">Browse Packages</a>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Get Your Referral Link</h3>
+                    <p>After enrollment, receive your unique link to share with friends.</p>
+                    <a href="#referral" class="btn btn-primary" style="margin-top: 15px;">Referral Program</a>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Earn Commissions</h3>
+                    <p>Earn both active and passive income for every successful referral.</p>
+                    <a href="#" class="btn btn-primary" style="margin-top: 15px;">See Earnings</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="section packages">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Packages</h2>
+                <p>Structured packages with clear earning potential</p>
+            </div>
+            
+            <div class="package-cards">
+                <!-- Basic Package -->
+                <div class="package-card basic">
+                    <div class="package-header">
+                        <h3>Basic</h3>
+                        <div class="package-price">₹99 <span>One-time</span></div>
+                        <p>Perfect for getting started</p>
+                    </div>
+                    <div class="package-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> Essential learning materials</li>
+                            <li><i class="fas fa-check-circle"></i> Community access</li>
+                            <li><i class="fas fa-check-circle"></i> Weekly Q&A sessions</li>
+                        </ul>
+                        
+                        <div class="income-stats">
+                            <div class="income-row">
+                                <span class="income-label">Active Income:</span>
+                                <span class="income-value">₹20</span>
+                            </div>
+                            <div class="income-row">
+                                <span class="income-label">Passive Income:</span>
+                                <span class="income-value">₹7</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="btn btn-basic" style="width: 100%; margin-top: 20px;">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <!-- Silver Package -->
+                <div class="package-card silver">
+                    <div class="package-header">
+                        <h3>Silver</h3>
+                        <div class="package-price">₹499 <span>One-time</span></div>
+                        <p>Great value package</p>
+                    </div>
+                    <div class="package-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> All Basic features</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced resources</li>
+                            <li><i class="fas fa-check-circle"></i> Monthly workshops</li>
+                        </ul>
+                        
+                        <div class="income-stats">
+                            <div class="income-row">
+                                <span class="income-label">Active Income:</span>
+                                <span class="income-value">₹100</span>
+                            </div>
+                            <div class="income-row">
+                                <span class="income-label">Passive Income:</span>
+                                <span class="income-value">₹30</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="btn btn-silver" style="width: 100%; margin-top: 20px;">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <!-- Gold Package -->
+                <div class="package-card gold">
+                    <div class="package-header">
+                        <h3>Gold</h3>
+                        <div class="package-price">₹999 <span>One-time</span></div>
+                        <p>Popular choice</p>
+                    </div>
+                    <div class="package-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> All Silver features</li>
+                            <li><i class="fas fa-check-circle"></i> Personal mentor access</li>
+                            <li><i class="fas fa-check-circle"></i> Exclusive webinars</li>
+                        </ul>
+                        
+                        <div class="income-stats">
+                            <div class="income-row">
+                                <span class="income-label">Active Income:</span>
+                                <span class="income-value">₹200</span>
+                            </div>
+                            <div class="income-row">
+                                <span class="income-label">Passive Income:</span>
+                                <span class="income-value">₹60</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="btn btn-gold" style="width: 100%; margin-top: 20px;">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <!-- Premium Package -->
+                <div class="package-card premium">
+                    <div class="package-header">
+                        <h3>Premium</h3>
+                        <div class="package-price">₹1999 <span>One-time</span></div>
+                        <p>For serious learners</p>
+                    </div>
+                    <div class="package-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> All Gold features</li>
+                            <li><i class="fas fa-check-circle"></i> Priority support</li>
+                            <li><i class="fas fa-check-circle"></i> Certification</li>
+                        </ul>
+                        
+                        <div class="income-stats">
+                            <div class="income-row">
+                                <span class="income-label">Active Income:</span>
+                                <span class="income-value">₹400</span>
+                            </div>
+                            <div class="income-row">
+                                <span class="income-label">Passive Income:</span>
+                                <span class="income-value">₹120</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="btn btn-premium" style="width: 100%; margin-top: 20px;">Enroll Now</a>
+                    </div>
+                </div>
+                
+                <!-- Elite Package -->
+                <div class="package-card elite">
+                    <div class="package-header">
+                        <h3>Elite</h3>
+                        <div class="package-price">₹4999 <span>One-time</span></div>
+                        <p>Maximum benefits</p>
+                    </div>
+                    <div class="package-features">
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> All Premium features</li>
+                            <li><i class="fas fa-check-circle"></i> 1:1 coaching sessions</li>
+                            <li><i class="fas fa-check-circle"></i> Business toolkit</li>
+                        </ul>
+                        
+                        <div class="income-stats">
+                            <div class="income-row">
+                                <span class="income-label">Active Income:</span>
+                                <span class="income-value">₹1000</span>
+                            </div>
+                            <div class="income-row">
+                                <span class="income-label">Passive Income:</span>
+                                <span class="income-value">₹300</span>
+                            </div>
+                            <div class="income-row highlight">
+                                <span class="income-label">Bonus:</span>
+                                <span class="income-value">Special Unlock</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="btn btn-elite" style="width: 100%; margin-top: 20px;">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Referral Program -->
+    <section id="referral" class="referral-program">
+        <div class="container">
+            <div class="referral-content">
+                <div class="referral-text">
+                    <h2>Structured Referral Program</h2>
+                    <p>Our transparent referral system allows you to earn both active and passive income</p>
+                    
+                    <div class="commission-structure">
+                        <h3>Commission Structure</h3>
+                        
+                        <table class="commission-table">
+                            <thead>
+                                <tr>
+                                    <th>Package</th>
+                                    <th>Price</th>
+                                    <th>Active Income</th>
+                                    <th>Passive Income</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Basic</td>
+                                    <td>₹99</td>
+                                    <td>₹20</td>
+                                    <td>₹7</td>
+                                </tr>
+                                <tr>
+                                    <td>Silver</td>
+                                    <td>₹499</td>
+                                    <td>₹100</td>
+                                    <td>₹30</td>
+                                </tr>
+                                <tr>
+                                    <td>Gold</td>
+                                    <td>₹999</td>
+                                    <td>₹200</td>
+                                    <td>₹60</td>
+                                </tr>
+                                <tr>
+                                    <td>Premium</td>
+                                    <td>₹1999</td>
+                                    <td>₹400</td>
+                                    <td>₹120</td>
+                                </tr>
+                                <tr>
+                                    <td>Elite</td>
+                                    <td>₹4999</td>
+                                    <td>₹1000</td>
+                                    <td>₹300</td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td colspan="4">Elite Package includes Bonus Unlock</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="hero-btns" style="margin-top: 30px;">
+                        <a href="#" class="btn btn-primary">Join Referral Program</a>
+                        <a href="#" class="btn btn-outline">See Full Terms</a>
+                    </div>
+                </div>
+                <div class="referral-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Referral Program">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Success Stories</h2>
+                <p>Hear from students who transformed their lives with EduWealth</p>
+            </div>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "I started with the ₹99 Basic package. Within 2 months, I earned over ₹5,000 through referrals while learning valuable skills!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RK</div>
+                        <div class="author-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>College Student</p>
+                            <div class="testimonial-earnings">₹5,200 Earned</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The ₹999 Gold package was perfect for my budget. I've earned over ₹12,000 through referrals while building my skills!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PM</div>
+                        <div class="author-info">
+                            <h4>Priya Mehta</h4>
+                            <p>Engineering Student</p>
+                            <div class="testimonial-earnings">₹12,500 Earned</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "I upgraded to Elite package and unlocked the bonus. The referral program helped me earn ₹45,000 in just 3 months!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AS</div>
+                        <div class="author-info">
+                            <h4>Arjun Singh</h4>
+                            <p>MBA Student</p>
+                            <div class="testimonial-earnings">₹45,000 Earned</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about our platform</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What's the difference between active and passive income?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <strong>Active income</strong> is earned for each direct referral you make. <strong>Passive income</strong> is earned when your referrals make referrals (second level). This creates a sustainable earning stream.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I get paid?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Earnings are credited to your EduWealth wallet immediately. You can withdraw to your bank account or UPI once you reach ₹500. Withdrawals process within 24 hours.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is the "Bonus Unlock" in Elite package?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Elite members unlock our exclusive "Mentor Program" where you earn ₹500 for every student you personally coach to Silver tier or higher. This is in addition to regular referral earnings.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is there any monthly fee?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        No! All packages are one-time payments with lifetime access. There are no recurring fees or hidden charges.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Start Earning Today</h2>
+            <p>Join thousands of students building skills and creating income streams</p>
+            <div class="cta-buttons">
+                <a href="#packages" class="btn btn-primary" style="background-color: #ffd43b; color: var(--dark);">Explore Packages</a>
+                <a href="#referral" class="btn btn-outline">Learn About Referrals</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>EduWealth</span>
+                    </div>
+                    <p>Empowering students with skills and income opportunities through structured learning and referral programs.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Packages</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Basic (₹99)</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Silver (₹499)</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Gold (₹999)</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Premium (₹1999)</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Elite (₹4999)</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#packages"><i class="fas fa-chevron-right"></i> Packages</a></li>
+                        <li><a href="#referral"><i class="fas fa-chevron-right"></i> Referral Program</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-envelope"></i> support@eduwealth.com</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +91 98765 43210</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Mumbai, India</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Mon-Sat: 9AM - 7PM</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 EduWealth. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for students</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const authButtons = document.querySelector('.auth-buttons');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                const isDisplayed = navLinks.style.display === 'flex';
+                navLinks.style.display = isDisplayed ? 'none' : 'flex';
+                authButtons.style.display = isDisplayed ? 'none' : 'flex';
+                
+                if (!isDisplayed) {
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '100%';
+                    navLinks.style.left = '0';
+                    navLinks.style.right = '0';
+                    navLinks.style.backgroundColor = 'var(--primary-dark)';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.gap = '15px';
+                    
+                    authButtons.style.flexDirection = 'column';
+                    authButtons.style.position = 'absolute';
+                    authButtons.style.top = 'calc(100% + 180px)';
+                    authButtons.style.left = '20px';
+                    authButtons.style.right = '20px';
+                    authButtons.style.padding = '0 20px 20px';
+                }
+            });
+        }
+        
+        // Package enrollment simulation
+        document.querySelectorAll('.package-card .btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if(this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    const packageName = this.closest('.package-card').querySelector('h3').textContent;
+                    const packagePrice = this.closest('.package-card').querySelector('.package-price').textContent;
+                    alert(`Thank you for choosing ${packageName} package (${packagePrice})! You'll be redirected to payment.`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
